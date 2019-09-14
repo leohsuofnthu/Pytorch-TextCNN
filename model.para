@@ -1,0 +1,17 @@
+language:en
+path_train:./train.csv
+path_valid:./valid.csv
+path_test:./test.csv
+path_submission:./submission.csv
+name_fields:idx, text, label
+device:gpu
+epochs:500
+batch_size:64
+num_classification:2
+num_kernel_channel:100
+kernel_height:3,4,5
+dropout_rate:0.6
+
+
+
+
