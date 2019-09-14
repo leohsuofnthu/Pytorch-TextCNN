@@ -1,2 +1,2 @@
-# -Pytorch-Convolutional-Neural-Networks-for-Sentence-Classification
+# Convolutional neural networks for text classification
 Implementation of text classification through Convolution Network that enables you to train your own classification task.
