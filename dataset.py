@@ -24,7 +24,7 @@ def split_train_valid(path_data, path_train, path_valid, frac=0.7):
     rng = RandomState()
     tr = df.sample(frac=0.7, random_state=rng)
     tst = df.loc[~df.index.isin(tr.index)]
-    print("spliting original file to train/valid set...")
+    print("Spliting original file to train/valid set...")
     tr.to_csv(path_train, index=False)
     tst.to_csv(path_valid, index=False)
 
@@ -70,7 +70,7 @@ def create_tabular_dataset(path_train, path_valid,
     #clean the text
     TEXT.preprocessing = torchtext.data.Pipeline(clean_str)
 
-    print('Creating tabular datasets...')
+    print('Creating tabular datasets...It might take a while to finish!')
     train_datafield = [('text', TEXT),  ('label', LABEL)]
     tabular_train = TabularDataset(path = path_train,  
                                  format= 'csv',
@@ -98,13 +98,13 @@ def create_data_iterator(tr_batch_size, val_batch_size,tabular_train,
     train_iter = Iterator(
             tabular_train, 
             batch_size=tr_batch_size,
-            device= d, 
+            device = d, 
             sort_within_batch=False,
             repeat=False)
     
     valid_iter = Iterator(
             tabular_valid, 
-            batch_size=val_batch_size, 
+            batch_size=val_batch_size,
             device=d,
             sort_within_batch=False, 
             repeat=False)

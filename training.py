@@ -11,8 +11,8 @@ import torch
 import torch.nn.functional as F
 
 #%% Training the Model
-def train(model, device, train_itr, optimizer, epoch, max_epoch):
-    model.train()
+def train(m, device, train_itr, optimizer, epoch, max_epoch):
+    m.train()
     corrects, train_loss = 0.0,0
     for batch in train_itr:
         text, target = batch.text, batch.label
@@ -20,7 +20,7 @@ def train(model, device, train_itr, optimizer, epoch, max_epoch):
         target.data.sub_(1)
         text, target = text.to(device), target.to(device)
         optimizer.zero_grad()
-        logit = model(text)
+        logit = m(text)
         
         loss = F.cross_entropy(logit, target)
         loss.backward()
@@ -36,8 +36,8 @@ def train(model, device, train_itr, optimizer, epoch, max_epoch):
   
     return train_loss, accuracy
     
-def valid(model, device, test_itr):
-    model.eval()
+def valid(m, device, test_itr):
+    m.eval()
     corrects, test_loss = 0.0,0
     for batch in test_itr:
         text, target = batch.text, batch.label
@@ -45,7 +45,7 @@ def valid(model, device, test_itr):
         target.data.sub_(1)
         text, target = text.to(device), target.to(device)
         
-        logit = model(text)
+        logit = m(text)
         loss = F.cross_entropy(logit, target)
 
         

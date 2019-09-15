@@ -12,10 +12,10 @@ import torch.nn.functional as F
 #%% Text CNN model
 class textCNN(nn.Module):
     
-    def __init__(self, vocab_built, emb_dim, dim_channel, kernel_wins, num_class):
+    def __init__(self, vocab_built, dim_channel, kernel_wins, num_class):
         super(textCNN, self).__init__()
         #load pretrained embedding in embedding layer.
-        print(vocab_built)
+        emb_dim = vocab_built.vectors.size()[1]
         self.embed = nn.Embedding(len(vocab_built), emb_dim)
         self.embed.weight.data.copy_(vocab_built.vectors)
     
