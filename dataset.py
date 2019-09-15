@@ -19,11 +19,12 @@ import torchtext.datasets
 
 import spacy
 
-def split_train_valid(frac=0.7, path_data, path_train, path_valid):
+def split_train_valid(path_data, path_train, path_valid, frac=0.7):
     df = pd.read_csv(path_data)
     rng = RandomState()
     tr = df.sample(frac=0.7, random_state=rng)
     tst = df.loc[~df.index.isin(tr.index)]
+    print("spliting original file to train/valid set...")
     tr.to_csv(path_train, index=False)
     tst.to_csv(path_valid, index=False)
 
@@ -50,8 +51,8 @@ def clean_str(string):
     string = re.sub(r"\s{2,}", " ", string)
     return string.strip()
     
-def create_tabular_dataset(lang='en', pretrained_emb='glove.6B.300d',
-                           path_train, path_valid):
+def create_tabular_dataset(path_train, path_valid, 
+                          lang='en', pretrained_emb='glove.6B.300d'):
     
     spacy_en = spacy.load('en', disable=['tagger', 'parser', 'ner', 'textcat'
                                      'entity_ruler', 'sentencizer', 
@@ -72,7 +73,7 @@ def create_tabular_dataset(lang='en', pretrained_emb='glove.6B.300d',
     print('Creating tabular datasets...')
     train_datafield = [('text', TEXT),  ('label', LABEL)]
     tabular_train = TabularDataset(path = path_train,  
-                                 format= path_valid,
+                                 format= 'csv',
                                  skip_header=True,
                                  fields=train_datafield)
     
@@ -81,11 +82,11 @@ def create_tabular_dataset(lang='en', pretrained_emb='glove.6B.300d',
     tabular_valid = TabularDataset(path = path_valid, 
                            format='csv',
                            skip_header=True,
-                           fields=test_datafield)
+                           fields=valid_datafield)
     
     print('Building vocaulary...')
-    TEXT.build_vocab(train, vectors= pretrained_emb)
-    LABEL.build_vocab(train)
+    TEXT.build_vocab(tabular_train, vectors= pretrained_emb)
+    LABEL.build_vocab(tabular_train)
 
     
     return tabular_train, tabular_valid, TEXT.vocab
@@ -95,14 +96,14 @@ def create_data_iterator(tr_batch_size, val_batch_size,tabular_train,
     #Create the Iterator for datasets (Iterator works like dataloader)
     
     train_iter = Iterator(
-            train, 
+            tabular_train, 
             batch_size=tr_batch_size,
             device= d, 
             sort_within_batch=False,
             repeat=False)
     
     valid_iter = Iterator(
-            test, 
+            tabular_valid, 
             batch_size=val_batch_size, 
             device=d,
             sort_within_batch=False, 
