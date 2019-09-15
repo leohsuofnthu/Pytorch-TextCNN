@@ -1,20 +1,25 @@
-# Project Title
+# Convolutional Neural Networks for Sentence Classification
 
-One Paragraph of project description goes here
+This is an Pytorch implementation of the paper [Convolutional Neural Networks for Sentence Classification](https://arxiv.org/abs/1408.5882), the structure in this project is named as **CNN-non-static** in the paper. I wrap this model to facilitate anyone who want to train and validate their own dataset with TextCNN rapidly by preparing certain format of *.csv* file and providing parameters from users.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Follow the following section to conduct your sentimental analysis experiments.
 
-### Prerequisites
+### Environment
 
-What things you need to install the software and how to install them
+This project is developed under following enviroment:
 
 ```
-Give examples
+python 3.6
+pytorch 1.2.0
+torchtext 0.4.0
+numpy 1.16.5
+pandas 0.25.1
+spacy 2.1.8
 ```
 
-### Installing
+### Format of .csv file
 
 A step by step series of examples that tell you how to get a development env running
 
@@ -56,29 +61,11 @@ Give an example
 
 Add additional notes about how to deploy this on a live system
 
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
 ## Authors
 
 * **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
