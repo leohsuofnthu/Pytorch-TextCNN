@@ -71,15 +71,20 @@ python main.py --data-csv ./IMDB_Dataset.csv --spacy-lang en --pretrained glove.
 and '--pretrained' at [torchtext pretrained_alias](https://torchtext.readthedocs.io/en/latest/vocab.html#pretrained-aliases)**
 
 ### 4. Check the results
+The *main.py* will produce two simple plot that helps you check if there is any probelm with traning. Moreover, the best validation parameters will be stored in the same directory. 
+
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **HSU, CHIH-CHAO** - *Professional Machine Learning Master Student at [MILA](https://mila.quebec/)* 
 
 ## Acknowledgments
+Thanks to the information from following sources:
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* https://stackoverflow.com/questions/43697240/how-can-i-split-a-dataset-from-a-csv-file-for-training-and-testing
+* http://anie.me/On-Torchtext/
+* https://mlexplained.com/2018/02/08/a-comprehensive-tutorial-to-torchtext/
+* https://torchtext.readthedocs.io/en/latest/examples.html
+* https://github.com/pytorch/text
+* https://github.com/pytorch/examples/blob/master/mnist/main.py
+* https://github.com/Shawn1993/cnn-text-classification-pytorch
