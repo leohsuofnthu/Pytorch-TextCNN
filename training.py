@@ -2,7 +2,7 @@
 """
 Created on Sat Sep 14 17:50:00 2019
 
-@author: Gabriel Hsu
+@author: HSU, CHIH-CHAO
 """
 
 #try to use nn for crossentropy
@@ -10,30 +10,38 @@ Created on Sat Sep 14 17:50:00 2019
 import torch
 import torch.nn.functional as F
 
+#%% Training the Model
 def train(model, device, train_itr, optimizer, epoch, max_epoch):
     model.train()
-    train_loss = 0
+    corrects, train_loss = 0.0,0
     for batch in train_itr:
         text, target = batch.text, batch.label
+        text = torch.transpose(text,0, 1)
         target.data.sub_(1)
         text, target = text.to(device), target.to(device)
-        
         optimizer.zero_grad()
         logit = model(text)
-        
         
         loss = F.cross_entropy(logit, target)
         loss.backward()
         optimizer.step()
-        train_loss+= loss.item()
         
-        return train_loss
+        train_loss+= loss.item()
+        result = torch.max(logit,1)[1]
+        corrects += (result.view(target.size()).data == target.data).sum()
     
-def eval(model, device, data_iter):
+    size = len(train_itr.dataset)
+    train_loss /= size 
+    accuracy = 100.0 * corrects/size
+  
+    return train_loss, accuracy
+    
+def valid(model, device, test_itr):
     model.eval()
-    corrects, avg_loss = 0,0
-    for batch in data_iter:
+    corrects, test_loss = 0.0,0
+    for batch in test_itr:
         text, target = batch.text, batch.label
+        text = torch.transpose(text,0, 1)
         target.data.sub_(1)
         text, target = text.to(device), target.to(device)
         
@@ -41,13 +49,12 @@ def eval(model, device, data_iter):
         loss = F.cross_entropy(logit, target)
 
         
-        avg_loss += loss.item()
+        test_loss += loss.item()
         result = torch.max(logit,1)[1]
         corrects += (result.view(target.size()).data == target.data).sum()
     
-    size = len(data_iter.dataset)
-    avg_loss /= size 
+    size = len(test_itr.dataset)
+    test_loss /= size 
     accuracy = 100.0 * corrects/size
-    print('\nEvaluation - loss: {:.6f} acc: {:.4f}%({}/{}) \n'.format(avg_loss,accuracy,corrects,size))
     
-    return accuracy
+    return test_loss, accuracy
