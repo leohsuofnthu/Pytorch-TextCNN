@@ -54,7 +54,7 @@ def main():
     parser.add_argument('--out-channel', type=int, default=100,
                     help='output channel for convolutionaly layer (default: 100)')
     
-    parser.add_argument('--dropout', type=int, default=0.5,
+    parser.add_argument('--dropout', type=float, default=0.5,
                         help='dropout rate for linear layer (default: 0.5)')
     
     parser.add_argument('--num-class', type=int, default=2,
