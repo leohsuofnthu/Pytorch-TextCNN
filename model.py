@@ -12,7 +12,7 @@ import torch.nn.functional as F
 #%% Text CNN model
 class textCNN(nn.Module):
     
-    def __init__(self, vocab_built, dim_channel, kernel_wins, num_class):
+    def __init__(self, vocab_built, dim_channel, kernel_wins, dropout_rate, num_class):
         super(textCNN, self).__init__()
         #load pretrained embedding in embedding layer.
         emb_dim = vocab_built.vectors.size()[1]
@@ -22,7 +22,7 @@ class textCNN(nn.Module):
         #Convolutional Layers with different window size kernels
         self.convs = nn.ModuleList([nn.Conv2d(1, dim_channel, (w, emb_dim)) for w in kernel_wins])
         #Dropout layer
-        self.dropout = nn.Dropout(0.6)
+        self.dropout = nn.Dropout(dropout_rate)
         
         #FC layer
         self.fc = nn.Linear(len(kernel_wins)*dim_channel, num_class)

@@ -85,7 +85,7 @@ def main():
                 
     #%%Create
     kernels = [int(x) for x in args.kernel_height.split(',')]
-    m = model.textCNN(vocab, args.out_channel, kernels , args.num_class).to(device)
+    m = model.textCNN(vocab, args.out_channel, kernels, args.dropout , args.num_class).to(device)
     # print the model summery
     print(m)    
         
