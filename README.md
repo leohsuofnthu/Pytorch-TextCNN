@@ -76,7 +76,7 @@ The *main.py* will produce two simple plot that helps you check if there is any 
 
 ## Authors
 
-* **HSU, CHIH-CHAO** - *Professional Machine Learning Master Student at [MILA](https://mila.quebec/)* 
+* **HSU, CHIH-CHAO** - *Professional Machine Learning Master Student at [Mila](https://mila.quebec/)* 
 
 ## Acknowledgments
 Thanks to the information from following sources:
