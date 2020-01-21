@@ -78,7 +78,7 @@ The *main.py* will produce two simple plot that helps you check if there is any 
 
 * **HSU, CHIH-CHAO** - *Professional Machine Learning Master Student at [Mila](https://mila.quebec/)* 
 
-## Acknowledgments
+## Reference
 Thanks to the information from following sources:
 
 * https://stackoverflow.com/questions/43697240/how-can-i-split-a-dataset-from-a-csv-file-for-training-and-testing
